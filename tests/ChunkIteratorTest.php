@@ -29,8 +29,9 @@ class ChunkIteratorTest extends TestCase
         $chunkIterator = new ChunkIterator(new \ArrayIterator($input), $size);
         $chunkIterator->rewind();
 
-        foreach ($expected as $chunk) {
+        foreach ($expected as $key => $chunk) {
             $this->assertTrue($chunkIterator->valid());
+            $this->assertSame($key, $chunkIterator->key());
             $this->assertSame($chunkIterator->current(), $chunk);
 
             $chunkIterator->next();

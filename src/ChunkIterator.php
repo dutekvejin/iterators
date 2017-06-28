@@ -20,12 +20,12 @@ final class ChunkIterator implements \Iterator
     protected $iterator;
     protected $size;
     protected $chunk;
+    protected $position;
 
     public function __construct(\Iterator $iterator, int $size = null)
     {
         $this->iterator = $iterator;
         $this->size = $size ?? 1;
-        $this->chunk = [];
     }
 
     public function current()
@@ -36,6 +36,7 @@ final class ChunkIterator implements \Iterator
     public function next()
     {
         $this->chunk = [];
+        $this->position++;
 
         for ($i = 0; $i < $this->size && $this->iterator->valid(); $i++) {
             $this->chunk[] = $this->iterator->current();
@@ -45,7 +46,7 @@ final class ChunkIterator implements \Iterator
 
     public function key()
     {
-        return -1;
+        return $this->position;
     }
 
     public function valid()
@@ -56,6 +57,7 @@ final class ChunkIterator implements \Iterator
     public function rewind()
     {
         $this->iterator->rewind();
+        $this->position = -1;
         $this->next();
     }
 }
