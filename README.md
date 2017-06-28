@@ -16,12 +16,19 @@ composer require dutekvejin/iterators
 
 ## Usage
 
+#### `Dutek\Iterator\ChunkIterator`
+Chunks an `\Iterator` into arrays with `size` elements. 
+
 ``` php
-$chunkIterator = new ChunkIterator(new \ArrayIterator([1, 2, 3, 4, 5]), 2);
+use Dutek\Iterator\ChunkIterator;
+
+$iterator = new \ArrayIterator([1, 2, 3, 4, 5]);
+$chunkIterator = new ChunkIterator($iterator, 2);
 
 foreach ($chunkIterator as $chunk) {
     var_dump($chunk);
 }
+
 ```
 
 ## Credits
