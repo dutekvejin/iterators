@@ -23,13 +23,28 @@ Chunks an `\Iterator` into arrays with `size` elements.
 use Dutek\Iterator\ChunkIterator;
 
 $iterator = new \ArrayIterator([1, 2, 3, 4, 5]);
-$chunkIterator = new ChunkIterator($iterator, 2);
+$size = 2;
+$chunkIterator = new ChunkIterator($iterator, $size);
 
-foreach ($chunkIterator as $chunk) {
-    var_dump($chunk);
-}
+assert(iterator_to_array($chunkIterator) === [[1, 2], [3, 4], [5]]);
+```
+
+#### `Dutek\Iterator\MapIterator`
+Applies the callback to the elements of the given `\Iterator`. 
+
+``` php
+use Dutek\Iterator\MapIterator;
+
+$iterator = new \ArrayIterator([1, 2, 3, 4, 5]);
+$callback = function (int $item) {
+    return $item ** 2;
+};
+$mapIterator = new MapIterator($iterator, $callback);
+
+assert(iterator_to_array($mapIterator) === [1, 4, 9, 16, 25]);
 
 ```
+
 
 ## Credits
 
