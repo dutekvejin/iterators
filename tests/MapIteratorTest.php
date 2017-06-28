@@ -30,7 +30,10 @@ class MapIteratorTest extends TestCase
         $mapIterator->rewind();
 
         foreach ($expected as $key => $chunk) {
+            $this->assertTrue($mapIterator->valid());
+            $this->assertSame($key, $mapIterator->key());
             $this->assertSame($mapIterator->current(), $chunk);
+
             $mapIterator->next();
         }
 
