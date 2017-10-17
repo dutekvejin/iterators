@@ -12,9 +12,6 @@ declare(strict_types=1);
 
 namespace Dutek\Iterator;
 
-/**
- * @author Dusan Vejin <dutekvejin@gmail.com>
- */
 final class ChunkIterator implements \Iterator
 {
     protected $iterator;

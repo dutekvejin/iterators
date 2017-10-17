@@ -15,9 +15,6 @@ namespace Dutek\Iterator\Tests;
 use Dutek\Iterator\ChunkIterator;
 use PHPUnit\Framework\TestCase;
 
-/**
- * @author Dusan Vejin <dutekvejin@gmail.com>
- */
 class ChunkIteratorTest extends TestCase
 {
 
