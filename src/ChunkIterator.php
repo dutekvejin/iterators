@@ -12,14 +12,16 @@ declare(strict_types=1);
 
 namespace Dutek\Iterator;
 
-final class ChunkIterator implements \Iterator
+use Iterator;
+
+final class ChunkIterator implements Iterator
 {
     protected $iterator;
     protected $size;
     protected $chunk;
     protected $position;
 
-    public function __construct(\Iterator $iterator, int $size = null)
+    public function __construct(Iterator $iterator, int $size = null)
     {
         $this->iterator = $iterator;
         $this->size = $size ?? 1;
