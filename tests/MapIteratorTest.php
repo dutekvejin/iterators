@@ -12,18 +12,20 @@ declare(strict_types=1);
 
 namespace Dutek\Iterator\Tests;
 
+use ArrayIterator;
 use Dutek\Iterator\MapIterator;
 use PHPUnit\Framework\TestCase;
+use stdClass;
 
 class MapIteratorTest extends TestCase
 {
 
     /**
-     * @dataProvider dataProvider
+     * @dataProvider processCallableDataProvider
      */
-    public function test(array $input, callable $callable, array $expected)
+    public function testProcessCallable(array $input, callable $callable, array $expected)
     {
-        $mapIterator = new MapIterator(new \ArrayIterator($input), $callable);
+        $mapIterator = new MapIterator(new ArrayIterator($input), $callable);
         $mapIterator->rewind();
 
         foreach ($expected as $key => $chunk) {
@@ -39,12 +41,12 @@ class MapIteratorTest extends TestCase
 
     public function testIsCallableResultCached()
     {
-        $callable = $this->createPartialMock(\stdClass::class, ['__invoke']);
+        $callable = $this->createPartialMock(stdClass::class, ['__invoke']);
         $callable->expects($this->once())
             ->method('__invoke')
             ->willReturn(2);
 
-        $mapIterator = new MapIterator(new \ArrayIterator([1]), $callable);
+        $mapIterator = new MapIterator(new ArrayIterator([1]), $callable);
         $mapIterator->rewind();
 
         for ($i = 0; $i < 2; $i++) {
@@ -52,17 +54,15 @@ class MapIteratorTest extends TestCase
         }
     }
 
-    public function dataProvider()
+    public function processCallableDataProvider()
     {
         $callable = function (int $current) {
             return $current ** 2;
         };
 
         return [
-            [
-                [], $callable, [],
-                [1, 2, 3, 4], $callable, [1, 4, 9, 16]
-            ],
+            [[], $callable, []],
+            [[1, 2, 3, 4], $callable, [1, 4, 9, 16]],
         ];
     }
 }

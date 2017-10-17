@@ -12,18 +12,18 @@ declare(strict_types=1);
 
 namespace Dutek\Iterator\Tests;
 
+use ArrayIterator;
 use Dutek\Iterator\ChunkIterator;
 use PHPUnit\Framework\TestCase;
 
 class ChunkIteratorTest extends TestCase
 {
-
     /**
      * @dataProvider dataProvider
      */
     public function test(array $input, int $size, array $expected)
     {
-        $chunkIterator = new ChunkIterator(new \ArrayIterator($input), $size);
+        $chunkIterator = new ChunkIterator(new ArrayIterator($input), $size);
         $chunkIterator->rewind();
 
         foreach ($expected as $key => $chunk) {
