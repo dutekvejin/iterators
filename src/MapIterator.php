@@ -12,7 +12,6 @@ declare(strict_types=1);
 
 namespace Dutek\Iterator;
 
-use Iterator;
 use IteratorIterator;
 
 final class MapIterator extends IteratorIterator
@@ -21,9 +20,9 @@ final class MapIterator extends IteratorIterator
     protected $callbackResult;
     protected $callbackResultCached;
 
-    public function __construct(Iterator $iterator, callable $callback)
+    public function __construct(iterable $iterable, callable $callback)
     {
-        parent::__construct($iterator);
+        parent::__construct($iterable);
         $this->callback = $callback;
     }
 

@@ -22,8 +22,12 @@ class MapIteratorTest extends TestCase
 
     /**
      * @dataProvider processCallableDataProvider
+     *
+     * @param iterable $input
+     * @param callable $callable
+     * @param array $expected
      */
-    public function testProcessCallable(array $input, callable $callable, array $expected)
+    public function testProcessCallable(iterable $input, callable $callable, array $expected)
     {
         $mapIterator = new MapIterator(new ArrayIterator($input), $callable);
         $mapIterator->rewind();
@@ -63,6 +67,8 @@ class MapIteratorTest extends TestCase
         return [
             [[], $callable, []],
             [[1, 2, 3, 4], $callable, [1, 4, 9, 16]],
+            [new ArrayIterator([3, 4]), $callable, [9, 16]],
+            [range(1, 5), $callable, [1, 4, 9, 16, 25]],
         ];
     }
 }

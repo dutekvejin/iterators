@@ -20,10 +20,14 @@ class ChunkIteratorTest extends TestCase
 {
     /**
      * @dataProvider dataProvider
+     *
+     * @param iterable $input
+     * @param int $size
+     * @param array $expected
      */
-    public function test(array $input, int $size, array $expected)
+    public function test(iterable $input, int $size, array $expected)
     {
-        $chunkIterator = new ChunkIterator(new ArrayIterator($input), $size);
+        $chunkIterator = new ChunkIterator($input, $size);
         $chunkIterator->rewind();
 
         foreach ($expected as $key => $chunk) {
@@ -44,6 +48,8 @@ class ChunkIteratorTest extends TestCase
             [[1, 2, 3], -1, []],
             [[1, 2, 3, 4, 5], 1, [[1], [2], [3], [4], [5]]],
             [[1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 3, [[1, 2, 3], [4, 5, 6], [7, 8, 9], [10]]],
+            [new ArrayIterator([1, 2, 3, 4, 5]), 4, [[1, 2, 3, 4], [5]]],
+            [range(1, 5), 2, [[1, 2], [3, 4], [5]]],
         ];
     }
 }

@@ -12,6 +12,7 @@ declare(strict_types=1);
 
 namespace Dutek\Iterator;
 
+use ArrayIterator;
 use Iterator;
 
 final class ChunkIterator implements Iterator
@@ -21,9 +22,13 @@ final class ChunkIterator implements Iterator
     protected $chunk;
     protected $position;
 
-    public function __construct(Iterator $iterator, int $size = null)
+    public function __construct(iterable $iterable, int $size = null)
     {
-        $this->iterator = $iterator;
+        if (is_array($iterable)) {
+            $iterable = new ArrayIterator($iterable);
+        }
+
+        $this->iterator = $iterable;
         $this->size = $size ?? 1;
     }
 
