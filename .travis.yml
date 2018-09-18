@@ -9,11 +9,11 @@ cache:
 
 matrix:
   include:
-    - php: 7
+    - php: 7.1
       env:
         - EXECUTE_CS_CHECK=true
         - EXECUTE_TEST_COVERALLS=true
-    - php: 7.1
+    - php: 7.2
     - php: hhvm
   allow_failures:
     - php: hhvm
