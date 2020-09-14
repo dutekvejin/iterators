@@ -29,7 +29,7 @@ class MapIteratorTest extends TestCase
      */
     public function testProcessCallable(iterable $input, callable $callable, array $expected)
     {
-        $mapIterator = new MapIterator(new ArrayIterator($input), $callable);
+        $mapIterator = new MapIterator($input, $callable);
         $mapIterator->rewind();
 
         foreach ($expected as $key => $chunk) {
@@ -50,7 +50,7 @@ class MapIteratorTest extends TestCase
             ->method('__invoke')
             ->willReturn(2);
 
-        $mapIterator = new MapIterator(new ArrayIterator([1]), $callable);
+        $mapIterator = new MapIterator([1], $callable);
         $mapIterator->rewind();
 
         for ($i = 0; $i < 2; $i++) {
