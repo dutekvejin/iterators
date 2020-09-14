@@ -15,7 +15,6 @@ namespace Dutek\Iterator;
 use ArrayIterator;
 use FilterIterator;
 
-
 final class UniqueIterator extends FilterIterator
 {
     protected $seen = [];
