@@ -37,7 +37,7 @@ final class ChunkIterator implements Iterator
         return $this->chunk;
     }
 
-    public function next()
+    public function next(): void
     {
         $this->chunk = [];
         $this->position++;
@@ -48,17 +48,17 @@ final class ChunkIterator implements Iterator
         }
     }
 
-    public function key()
+    public function key(): int
     {
         return $this->position;
     }
 
-    public function valid()
+    public function valid(): bool
     {
         return (bool)$this->chunk;
     }
 
-    public function rewind()
+    public function rewind(): void
     {
         $this->iterator->rewind();
         $this->position = -1;

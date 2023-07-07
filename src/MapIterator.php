@@ -41,7 +41,7 @@ final class MapIterator extends IteratorIterator
         return $this->callbackResult;
     }
 
-    public function next()
+    public function next(): void
     {
         parent::next();
         $this->callbackResult = null;

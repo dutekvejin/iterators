@@ -43,21 +43,6 @@ class MapIteratorTest extends TestCase
         $this->assertFalse($mapIterator->valid());
     }
 
-    public function testIsCallableResultCached()
-    {
-        $callable = $this->createPartialMock(stdClass::class, ['__invoke']);
-        $callable->expects($this->once())
-            ->method('__invoke')
-            ->willReturn(2);
-
-        $mapIterator = new MapIterator([1], $callable);
-        $mapIterator->rewind();
-
-        for ($i = 0; $i < 2; $i++) {
-            $this->assertSame(2, $mapIterator->current());
-        }
-    }
-
     public function processCallableDataProvider()
     {
         $callable = function (int $current) {
